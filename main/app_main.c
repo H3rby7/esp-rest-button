@@ -11,6 +11,7 @@
 #include "wifi/soft_ap.h"
 #include "wifi/save_load_cfg.h"
 #include "wifi/web_ap_conf.h"
+#include "button/button.h"
 
 static const char *TAG = "MAIN";
 
@@ -44,11 +45,17 @@ void init_nvs(void)
     ESP_ERROR_CHECK(ret);
 }
 
+static void button_single_click_cb(void *arg,void *usr_data)
+{
+    ESP_LOGI(TAG, "BUTTON_SINGLE_CLICK");
+}
+
 void app_main(void)
 {
     ESP_LOGI(TAG, "Starting APP");
     init_nvs();
     configure_wifi();
+    create_button(21, button_single_click_cb);
     while (1) {
         ESP_LOGI(TAG, "I'm still standing!");
         vTaskDelay(10000 / portTICK_PERIOD_MS);
