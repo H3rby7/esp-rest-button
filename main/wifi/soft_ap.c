@@ -54,11 +54,11 @@ uint32_t get_default_ap_adress()
 }
 
 /**
-  * @brief  Event Handler for WIFI events 
-  * @param  void* event_handler_arg,
-  * @param  esp_event_base_t event_base,
-  * @param  int32_t event_id,
-  * @param  void* event_data
+  * @brief  Event Handler for WIFI events
+  * @param  event_handler_arg unused,
+  * @param  event_base somewhat the category of the event,
+  * @param  event_id exact ID for the event (given the event_base X),
+  * @param  event_data any event data
   * @retval None
   * @see esp_event_handler_t.c
   */
@@ -155,7 +155,7 @@ void open_ap(void)
 
 /**
   * @brief  Connect to an existing WIFI using ssid and password
-  * @param wifi_sta_config_t* wifi_config of the network
+  * @param wifi_config config of the network we try to connect to
   * @retval None
   */
 void attempt_connect_to_existing_wifi(wifi_sta_config_t* wifi_config)
@@ -180,9 +180,8 @@ void attempt_connect_to_existing_wifi(wifi_sta_config_t* wifi_config)
 }
 
 /**
-  * @brief  Attempt onnect to an existing WIFI or create own on failure
-  * @param char* ssid of the existing network
-  * @param pwd* password of the existing network
+  * @brief  Attempt to connect to an existing WIFI or create own on failure
+  * @param wifi_config config of the network we try to connect to
   * @retval esp_ip4_addr_t IPV4 adress for convenience
   */
 esp_ip4_addr_t connect_or_ap(wifi_sta_config_t* wifi_config)

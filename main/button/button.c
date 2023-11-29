@@ -5,6 +5,8 @@ static const char *BUTTON_TAG = "BTN";
 
 /**
  * @brief  Create a button handle
+ * @param gpio_num the number of the GPIO pin to use
+ * @param cb callback on (single click) button press
  * @retval button_handle_t the button
  */
 button_handle_t create_button(int32_t gpio_num, button_cb_t cb)

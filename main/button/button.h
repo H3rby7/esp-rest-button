@@ -3,5 +3,5 @@
 
 #include "iot_button.h"
 
-button_handle_t create_button();
+button_handle_t create_button(int32_t gpio_num, button_cb_t cb);
 #endif

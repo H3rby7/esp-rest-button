@@ -10,7 +10,7 @@ static const char *SAVE_LOAD_TAG = "NVS";
 
 /**
   * @brief Load SSID and PWD of a WIFI network from NVS
-  * @param wifi_sta_config_t* wifi_config reference to load data into.
+  * @param wifi_config reference to load data into.
   * @retval esp_err_t error
   */
 esp_err_t load_known_wifi_config(wifi_sta_config_t* wifi_config)
@@ -75,7 +75,7 @@ esp_err_t load_known_wifi_config(wifi_sta_config_t* wifi_config)
 
 /**
   * @brief Save SSID and PWD of a WIFI network to NVS
-  * @param wifi_sta_config_t* wifi_config to save
+  * @param wifi_config config to save
   * @retval esp_err_t error
   */
 esp_err_t save_wifi_config(wifi_sta_config_t* wifi_config)
