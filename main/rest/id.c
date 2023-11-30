@@ -2,6 +2,8 @@
 #include "esp_mac.h"
 #include "esp_log.h"
 #include "esp_random.h"
+#include "math.h"
+#include "string.h"
 
 static const char *GET_ID_TAG = "UID";
 
@@ -16,7 +18,7 @@ uint64_t uint8arr_to_uint64(uint8_t *arr) {
   {
     uint8_t val = arr[i];
     ESP_LOGD(GET_ID_TAG, "MAC at %d is %u", i, val);
-    res += (i+1) * arr[i]; 
+    res += powl(256, i) * arr[i]; 
   }
   return res;
 }
@@ -30,6 +32,7 @@ uint64_t uint8arr_to_uint64(uint8_t *arr) {
 uint64_t read_mac_or_random_uid()
 {
   uint8_t macAdress[8];
+  memset(&macAdress[0], 0, sizeof(macAdress));
   if (esp_efuse_mac_get_default(&macAdress) == ESP_OK)
   {
     ESP_LOGD(GET_ID_TAG, "Successfully acquired MAC to use as UID");
