@@ -12,6 +12,7 @@
 #include "wifi/save_load_cfg.h"
 #include "wifi/web_ap_conf.h"
 #include "button/button.h"
+#include "rest/request.h"
 
 static const char *TAG = "MAIN";
 
@@ -47,7 +48,7 @@ void init_nvs(void)
 
 static void button_single_click_cb(void *arg,void *usr_data)
 {
-    ESP_LOGI(TAG, "BUTTON_SINGLE_CLICK");
+    send_rest_request();
 }
 
 void app_main(void)
