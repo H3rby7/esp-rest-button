@@ -1,0 +1,7 @@
+menu "APP Configuration"
+  config DMX_WEB_SERVER
+      string "DMX Webserver"
+      default "dmxweb.local"
+      help
+          DMX Webserver Endpoint host-name.
+endmenu

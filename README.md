@@ -87,3 +87,4 @@ or select them from the bottom tray menu.
 # Further Reading
 
 - [More Documentation](./docs)
+- [Help with Espressif](./espressif-help.md)

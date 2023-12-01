@@ -307,6 +307,12 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# APP Configuration
+#
+CONFIG_DMX_WEB_SERVER="dmxweb.local"
+# end of APP Configuration
+
+#
 # Compiler options
 #
 CONFIG_COMPILER_OPTIMIZATION_DEFAULT=y
