@@ -3,6 +3,7 @@
 A physiacl button to the ESP32 will send out a REST request to a given server.
 
 - [ESP32 REST BUTTON](#esp32-rest-button)
+  - [TODOs](#todos)
 - [Setup](#setup)
   - [Drivers](#drivers)
 - [Development and Flashing](#development-and-flashing)
@@ -10,6 +11,11 @@ A physiacl button to the ESP32 will send out a REST request to a given server.
 - [Run](#run)
   - [Setting up WIFI](#setting-up-wifi)
 - [Further Reading](#further-reading)
+
+## TODOs
+
+- [ ] DMX Web Endpoint configurable into nvs via webserver
+- [ ] DMX Web Reqeust Configurable content
 
 # Setup
 
