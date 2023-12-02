@@ -20,20 +20,23 @@ int send_rest_request()
 
   ESP_LOGV(REST_REQ_TAG, "Initializing HTTP Client...");
   esp_http_client_config_t config = {
-      .host = CONFIG_DMX_WEB_SERVER,
+      .host = CONFIG_DMX_WEB_SERVER_HOST,
+      .port = CONFIG_DMX_WEB_SERVER_PORT,
       .path = "/api/v1/trigger",
       .method = HTTP_METHOD_POST,
+      .timeout_ms = 100,
       .transport_type = HTTP_TRANSPORT_OVER_TCP,
   };
   esp_http_client_handle_t client = esp_http_client_init(&config);
   ESP_LOGD(REST_REQ_TAG, "HTTP Client initialized.");
 
   // UID as POST content
-  char uid[20];
-  sprintf(uid, "%llu", ownID);
-  esp_http_client_set_post_field(client, uid, strlen(uid));
+  char content[100];
+  sprintf(content, "{\"source\": \"%llu\"}", ownID);
+  esp_http_client_set_post_field(client, content, strlen(content));
+  esp_http_client_set_header(client, "Content-Type", "application/json");
 
-  ESP_LOGI(REST_REQ_TAG, "Performing POST to '%s', using path '%s' with content '%s'", config.host, config.path, uid);
+  ESP_LOGI(REST_REQ_TAG, "Performing POST to '%s', using path '%s' with content '%s'", config.host, config.path, content);
   esp_err_t err = esp_http_client_perform(client);
   if (err == ESP_OK)
   {

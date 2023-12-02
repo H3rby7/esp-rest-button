@@ -1,7 +1,12 @@
 menu "APP Configuration"
-  config DMX_WEB_SERVER
-      string "DMX Webserver"
+  config DMX_WEB_SERVER_HOST
+      string "DMX Webserver Hostname"
       default "dmxweb.local"
       help
           DMX Webserver Endpoint host-name.
+  config DMX_WEB_SERVER_PORT
+      int "DMX Webserver Port"
+      default "80"
+      help
+          DMX Webserver Endpoint port.
 endmenu
