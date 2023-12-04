@@ -56,9 +56,9 @@ void app_main(void)
     ESP_LOGI(TAG, "Starting APP");
     init_nvs();
     configure_wifi();
-    create_button(21, button_single_click_cb);
+    create_button(32, button_single_click_cb);
     while (1) {
         ESP_LOGI(TAG, "I'm still standing!");
-        vTaskDelay(10000 / portTICK_PERIOD_MS);
+        vTaskDelay(100000 / portTICK_PERIOD_MS);
     }
 }

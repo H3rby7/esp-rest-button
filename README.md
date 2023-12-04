@@ -10,6 +10,7 @@ A physiacl button to the ESP32 will send out a REST request to a given server.
   - [VS-Code with Espressif](#vs-code-with-espressif)
 - [Run](#run)
   - [Setting up WIFI](#setting-up-wifi)
+  - [Powering via Battery](#powering-via-battery)
 - [Further Reading](#further-reading)
 
 ## TODOs
@@ -89,6 +90,14 @@ or select them from the bottom tray menu.
 1. If no previously configured wifi can be reached, the esp32 opens its own wifi with SSID `ESP32-REST-BTN` and no password.
 2. Connect to this wifi with a device and visit the default gateway (http://192.168.4.1) with your favorite browser. 
 3. On the webpage insert the credentials of the network you want to provision.
+
+## Powering via Battery
+
+This seems to be a bit tricky, because the ESP32 seems to require a lot of energy when booting up WITH the wifi module active. Many batteries, that usually supply enough energy, cannot handle this burst in energy drain.
+
+A list of setups, that worked for me:
+
+* Lithium Battery CR123 (3.0V), connected to 3V3 PIN and GND
 
 # Further Reading
 
