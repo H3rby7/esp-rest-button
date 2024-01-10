@@ -10,7 +10,7 @@
 //APP includes
 #include "wifi/soft_ap.h"
 #include "wifi/save_load_cfg.h"
-#include "wifi/web_ap_conf.h"
+#include "web/web.h"
 #include "button/button.h"
 #include "rest/request.h"
 
