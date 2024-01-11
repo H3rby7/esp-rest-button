@@ -9,7 +9,7 @@
 
 //APP includes
 #include "wifi/soft_ap.h"
-#include "wifi/save_load_cfg.h"
+#include "wifi/nvs_wifi.h"
 #include "web/web.h"
 #include "button/button.h"
 #include "rest/request.h"
@@ -23,7 +23,7 @@ void configure_wifi(void) {
     esp_ip4_addr_t self_ip;
 
     ESP_LOGI(TAG, "Loading previous WIFI config");
-    load_known_wifi_config(&wifi_config);
+    load_known_wifi_config_from_nvs(&wifi_config);
 
     ESP_LOGI(TAG, "Connecting to known WIFI or launching Config AP if known WIFI is not in range.");
     self_ip = connect_or_ap(&wifi_config);

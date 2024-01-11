@@ -8,7 +8,7 @@
 #include "esp_log.h"
 #include <string.h>
 #include "esp_wifi.h"
-#include "save_load_cfg.h"
+#include "nvs_wifi.h"
 
 static const char *WEB_AP_CONF_TAG = "WEB-CONFIG";
 
@@ -138,7 +138,7 @@ esp_err_t index_post_handler(httpd_req_t *req)
 
     free(ssidDecoded);
     free(pwdDecoded);
-    err = save_wifi_config(&wifi_config);
+    err = save_wifi_config_to_nvs(&wifi_config);
     if (err != ESP_OK) return err;
 
     int secondsToReboot = 5;
