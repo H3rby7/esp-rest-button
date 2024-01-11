@@ -5,6 +5,7 @@
 #include "esp_wifi.h"
 #include "restart.h"
 #include "../wifi/web_ap_conf.h"
+#include "../rest/endpoint_conf.h"
 
 static const char *WEB_TAG = "WEB";
 
@@ -22,6 +23,8 @@ httpd_handle_t start_webserver(void)
         httpd_register_uri_handler(server, &index_get);
         httpd_register_uri_handler(server, &index_post);
         httpd_register_uri_handler(server, &restart_post);
+        httpd_register_uri_handler(server, &endpoint_get);
+        httpd_register_uri_handler(server, &endpoint_post);
         #if CONFIG_EXAMPLE_BASIC_AUTH
         httpd_register_basic_auth(server);
         #endif

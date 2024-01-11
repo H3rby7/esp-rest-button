@@ -40,7 +40,7 @@ esp_err_t load_known_wifi_config_from_nvs(wifi_sta_config_t* wifi_config)
         ESP_LOGV(NVS_WIFI_TAG, "SSID is not empty, re-reading to set");
         err = nvs_get_blob(my_handle, "ssid", (wifi_config->ssid), &required_size);
         if (err != ESP_OK) {
-            ESP_LOGE(NVS_WIFI_TAG,"Failed setting SSID!");
+            ESP_LOGE(NVS_WIFI_TAG,"Failed loading SSID! ERR: %s", esp_err_to_name(err));
             return err;
         }
         ESP_LOGI(NVS_WIFI_TAG,"Loaded SSID: '%s'", wifi_config->ssid);
@@ -58,7 +58,7 @@ esp_err_t load_known_wifi_config_from_nvs(wifi_sta_config_t* wifi_config)
         ESP_LOGV(NVS_WIFI_TAG, "Password is not empty, re-reading to set");
         err = nvs_get_blob(my_handle, "pwd", (wifi_config->password), &required_size);
         if (err != ESP_OK) {
-            ESP_LOGE(NVS_WIFI_TAG,"Failed setting Password!");
+            ESP_LOGE(NVS_WIFI_TAG,"Failed loading Password! ERR: %s", esp_err_to_name(err));
             return err;
         }
         ESP_LOGI(NVS_WIFI_TAG,"Loaded Password.");

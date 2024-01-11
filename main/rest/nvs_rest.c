@@ -13,7 +13,7 @@ static const char *NVS_REST_NAMESPACE = "rest";
   * @param config reference to load data into.
   * @retval esp_err_t error
   */
-esp_err_t load_rest_config_from_nvs(rest_config_t* config)
+esp_err_t load_rest_config_from_nvs(endpoint_config_t* config)
 {
     ESP_LOGI(NVS_REST_TAG, "Loading data");
     nvs_handle_t my_handle;
@@ -37,9 +37,9 @@ esp_err_t load_rest_config_from_nvs(rest_config_t* config)
         ESP_LOGW(NVS_REST_TAG,"host length is 0!");
     } else {
         ESP_LOGV(NVS_REST_TAG, "host is not empty, re-reading to set");
-        err = nvs_get_blob(my_handle, "host", (config->host), &required_size);
+        err = nvs_get_str(my_handle, "host", (config->host), &required_size);
         if (err != ESP_OK) {
-            ESP_LOGE(NVS_REST_TAG,"Failed setting host!");
+            ESP_LOGE(NVS_REST_TAG,"Failed loading host! ERR: %s", esp_err_to_name(err));
             return err;
         }
         ESP_LOGI(NVS_REST_TAG,"Loaded host: '%s'", config->host);
@@ -55,9 +55,9 @@ esp_err_t load_rest_config_from_nvs(rest_config_t* config)
         ESP_LOGI(NVS_REST_TAG,"port length is 0!");
     } else {
         ESP_LOGV(NVS_REST_TAG, "port is not empty, re-reading to set");
-        err = nvs_get_blob(my_handle, "port", (config->port), &required_size);
+        err = nvs_get_u16(my_handle, "port", (config->port));
         if (err != ESP_OK) {
-            ESP_LOGE(NVS_REST_TAG,"Failed setting port!");
+            ESP_LOGE(NVS_REST_TAG,"Failed loading port! ERR: %s", esp_err_to_name(err));
             return err;
         }
         ESP_LOGI(NVS_REST_TAG,"Loaded port: '%d'", config->port);
@@ -76,7 +76,7 @@ esp_err_t load_rest_config_from_nvs(rest_config_t* config)
   * @param config config to save
   * @retval esp_err_t error
   */
-esp_err_t save_rest_config_to_nvs(rest_config_t* config)
+esp_err_t save_rest_config_to_nvs(endpoint_config_t* config)
 {
     nvs_handle_t my_handle;
     esp_err_t err;
@@ -88,13 +88,13 @@ esp_err_t save_rest_config_to_nvs(rest_config_t* config)
     ESP_LOGD(NVS_REST_TAG, "Successfully opened namespace '%s'", NVS_REST_NAMESPACE);
 
     ESP_LOGV(NVS_REST_TAG, "Writing host to storage");
-    err = nvs_set_blob(my_handle, "host", config->host, sizeof(config->host));
+    err = nvs_set_str(my_handle, "host", config->host);
 
     if (err != ESP_OK) return err;
     ESP_LOGD(NVS_REST_TAG, "Successfully wrote host to storage");
 
     ESP_LOGV(NVS_REST_TAG, "Writing port to storage");
-    err = nvs_set_blob(my_handle, "port", config->port, sizeof(config->port));
+    err = nvs_set_u16(my_handle, "port", config->port);
 
     if (err != ESP_OK) return err;
     ESP_LOGD(NVS_REST_TAG, "Successfully wrote port to storage");
@@ -103,7 +103,7 @@ esp_err_t save_rest_config_to_nvs(rest_config_t* config)
     ESP_LOGV(NVS_REST_TAG, "Committing changes");
     err = nvs_commit(my_handle);
     if (err != ESP_OK) return err;
-    ESP_LOGI(NVS_REST_TAG, "Successfully saved REST data");
+    ESP_LOGI(NVS_REST_TAG, "Successfully saved Endpoint data");
 
     // Close
     ESP_LOGV(NVS_REST_TAG, "Closing storage");
